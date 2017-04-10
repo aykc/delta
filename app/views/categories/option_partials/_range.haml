@@ -1,0 +1,3 @@
+%p
+  = option.name + ': '
+  = range_field_tag "filter[#{option.id}]", min: option.validations[:minimum], max: option.validations[:maximum], step: 1

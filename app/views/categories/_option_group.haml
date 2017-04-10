@@ -1,0 +1,13 @@
+%fieldset
+  = render 'error', obj: f.object
+  %p
+    = f.label :name
+    = f.text_field :name
+  %p
+    = f.hidden_field :_destroy
+    = link_to 'Delete option group', '#', class: 'option_field_remove'
+  %h4
+    Options:
+  = f.fields_for :options do |option|
+    = render 'option', f: option
+  = link_to_add_option 'Add option', f, :options

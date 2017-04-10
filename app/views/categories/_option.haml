@@ -1,0 +1,27 @@
+%fieldset
+  = render 'error', obj: f.object
+  = f.hidden_field :id
+  %p
+    = f.label :name
+    = f.text_field :name
+  %p
+    = f.label :option_type
+    = f.select :option_type, %w(text_field select checkbox range datetime)
+  %p
+    Validations:
+    = f.fields_for :validations, OpenStruct.new(f.object.validations) do |validation_form|
+      %p
+        = validation_form.label :required
+        = validation_form.check_box :required
+      %p
+        = validation_form.label :values
+        = validation_form.text_area :values, value: ->{ '' || validation_form.object.values.join(', ') if validation_form.object.values.is_a?(Array)}.call
+      %p
+        = validation_form.label :minimum
+        = validation_form.text_field :minimum
+      %p
+        = validation_form.label :maximum
+        = validation_form.text_field :maximum
+  %p
+    = f.hidden_field :_destroy
+    = link_to 'Delete option', '#', class: 'option_field_remove'

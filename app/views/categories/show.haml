@@ -1,0 +1,54 @@
+%h1
+  = @category.name
+= link_to 'Edit', edit_category_path(@category)
+-#%h2
+-#  Option groups:
+-#-@category.option_groups.each do |group|
+-#  Group name:
+-#  = group.name
+-#  %h3
+-#    Options:
+-#  - group.options.each do |option|
+-#    %ol
+-#      %p
+-#        Name:
+-#        = option.name
+-#      %p
+-#        Option type:
+-#        = option.option_type
+-#      %p
+-#        Validations:
+-#        = option.validations
+-#    %br
+-#= link_to 'back', categories_path
+
+%h2
+  Filter:
+
+-#= form_for @category, method: :get do |f|
+-#  = f.fields_for :option_groups do |group|
+-#    = group.fields_for :options do |option|
+-#      = render 'items/'+option.object.option_type, f: option
+-#  = f.submit 'search', name: nil
+
+= form_for @category, method: :get do |f|
+  - @category.options.each do |option|
+    = render "categories/option_partials/#{option.option_type}", option: option
+  = f.submit :search, name: nil
+
+- @filter.each do |k, v|
+  %p
+    = k + ': ' + v
+
+%h2
+  Items:
+
+%ol
+  - @items.each do |item|
+    %li
+      = item.name
+      - item.options.each do |option|
+        %p
+          = option.name + ': ' + option.value
+
+= console

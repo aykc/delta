@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails delta: development" uuid="5eddb6d7-2421-49f1-88c5-ed39aa26d40c">
+      <database-info product="PostgreSQL" version="9.5.6" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <user-name>aykc</user-name>
+      <user-password>dfdedfcfdfd9dfde</user-password>
+      <resolve-scope>delta_development:pg_catalog,public</resolve-scope>
+    </data-source>
+    <data-source name="Rails delta: test" uuid="69c58f9d-f6bb-4169-aeae-d9b004788a15">
+      <database-info product="PostgreSQL" version="9.5.6" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <user-name>aykc</user-name>
+      <user-password>dfdedfcfdfd9dfde</user-password>
+      <resolve-scope>delta_test:pg_catalog,public</resolve-scope>
+    </data-source>
+    <data-source name="Rails delta: production" uuid="89edcb4d-e201-41dc-99ce-ffdc59e06413">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <first-sync>true</first-sync>
+      <user-name>aykc</user-name>
+      <user-password>dfdedfcfdfd9dfde</user-password>
+    </data-source>
+  </component>
+</project>

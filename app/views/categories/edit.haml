@@ -1,0 +1,16 @@
+%a
+  = link_to "back", categories_path
+%h2
+  Item
+= render 'error', obj: @category
+= form_for @category do |f|
+  = f.label :name
+  = f.text_field :name
+  %h3
+    Option groups:
+  = f.fields_for :option_groups do |group|
+    = render 'option_group', f: group
+    %br
+  = link_to_add_option 'Add option group', f, :option_groups
+  %p
+    = f.submit

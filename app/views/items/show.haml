@@ -1,0 +1,11 @@
+%h1
+  = @item.name
+%h2
+  Specifications:
+- @item.option_groups.each do |group|
+  %h3
+    #{group.name}:
+  - group.options.each do |option|
+    %p
+      #{option.name}:
+      = option.value

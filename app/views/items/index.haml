@@ -1,0 +1,14 @@
+%p
+  = form_tag new_item_path, method: :get do
+    = select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name)
+    = submit_tag 'New item', name: nil
+
+%ul
+  - @items.each do |item|
+    %li
+      = link_to item.name, item_path(item)
+
+-#%fieldset
+-#  = form_tag items_path, method: :get do
+-#    = select_tag :category_id, options_from_collection_for_select(Category.all, :id, :name)
+-#    = submit_tag

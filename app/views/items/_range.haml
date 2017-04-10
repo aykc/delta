@@ -1,0 +1,4 @@
+%p
+  = f.hidden_field :id
+  = f.label f.object.name
+  = f.range_field :value, min: f.object.validations[:minimum], max: f.object.validations[:maximum], step: 1
