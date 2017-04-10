@@ -4,7 +4,8 @@ class CategoriesController < ApplicationController
   end
   def show
     @category = Category.find params[:id]
-    @filter = filter_params.to_h
+    @filter = {}
+    @filter = filter_params.to_h if params[:filter]
     @items = @category.filter(@filter)
   end
   def new
