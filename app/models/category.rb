@@ -9,7 +9,14 @@ class Category < ApplicationRecord
   def filter(attrs)
     # (" options -> '0144424b-d70b-4eed-a9fc-9008aecb37af' ->> 'value' = 'blue'
     # and options -> '326adcd0-8c1e-438a-bb52-5601d0e61073' ->> 'value' = 'medium' ")
-    conditions = attrs.delete_if{|k, v| v.blank? }.map{|k, v| "options -> '#{k}' ->> 'value' = '#{v}'" }.join(' and ')
+    return items if attrs.blank?
+    conditions = attrs.delete_if{|k, v| v.blank? or (v.is_a?(Hash) and (v['0'].blank? or v['1'].blank?)) }.map do |k, v|
+      if v.is_a?(Hash) then
+        "options -> '#{k}' ->> 'value' >= '#{v['0']}' and options -> '#{k}' ->> 'value' <= '#{v['1']}'"
+      else
+        "options -> '#{k}' ->> 'value' = '#{v}'"
+      end
+    end.join(' and ')
     items.where(conditions)
   end
 
@@ -25,7 +32,6 @@ class Category < ApplicationRecord
       g.options = options
       g
     end
-    # @built_option_groups.nil? ? @option_groups : @option_groups + @built_option_groups
     @option_groups
   end
 
@@ -50,29 +56,26 @@ class Category < ApplicationRecord
     # write_attribute(:options, prepare_options_to_save)
   end
 
-  # def options_attributes=(attributes)
-  #   opts = {}
-  #   attributes.each do |index, attrs|
-  #     next if '1' == attrs.delete("_destroy")
-  #     attrs['id'] = SecureRandom.uuid
-  #     opts[attrs['id']] = attrs
-  #   end
-  #   write_attribute(:options, opts)
-  # end
-  #
-  # def build_option(attr = nil)
-  #   @built_options ||= Array.new
-  #   opt = Option.new(attr)
-  #   @built_options << opt
-  #   opt
-  # end
-  private
+  # private
     def prepare_options_to_save
       opts = {}
+      generate_ids
       options.each do |option|
         option.validations['values'] = option.validations['values'].split(',').each{|item| item.strip!} if option.validations['values'].is_a?(String) and !option.validations['values'].blank?
         opts[option.id] = option
       end
       write_attribute(:options, opts)
     end
+
+    def generate_ids
+      options.each{|o| o.id = 0 if o.id.blank? }
+      max = options.inject{|memo, o| memo.id > o.id ? memo : o }.id
+      options.each do |o|
+        if o.id.blank? or o.id == 0
+          max = max + 1
+          o.id = max
+        end
+      end
+    end
+
 end

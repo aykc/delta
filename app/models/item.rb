@@ -24,12 +24,12 @@ class Item < ApplicationRecord
   def options
     options = category_options
     opts = read_attribute(:options)
-    options.each{|o| opts.each{|k, v| o.value = v['value'] if k == o.id }}
-    write_attribute :options, options
+    options.each{|o| opts.each{|k, v| o.value = v['value'] if k.to_i == o.id.to_i }}
+    # write_attribute :options, options
   end
 
   def options_attributes=(attributes)
-    options.each{|o| attributes.each{|k, v| o.value = v['value'] if v['id'] == o.id }}
+    options.each{|o| attributes.each{|k, v| o.value = v['value'] if v['id'].to_i == o.id.to_i }}
     write_attribute(:options, options)
   end
 

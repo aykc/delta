@@ -6,7 +6,7 @@ class Option
 
   def initialize(attr = nil)
     attr = ActiveSupport::HashWithIndifferentAccess.new(attr)
-    @id = attr['id'] || SecureRandom.uuid
+    @id = attr['id']
     @name = attr['name']
     @option_type = attr['option_type']
     @value = attr['value']

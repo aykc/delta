@@ -3,6 +3,11 @@ class OptionGroup
   attr_accessor :name, :options
   validates :name, presence: true
 
+  def name=(value)
+    @name = value
+    options.each{|o| o.group_name = value } unless options.blank?
+  end
+
   def options=(opts)
     if opts.respond_to? 'map'
       @options = opts.map {|opt| opt.group_name = name; opt}

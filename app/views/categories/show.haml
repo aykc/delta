@@ -38,7 +38,7 @@
 
 - @filter.each do |k, v|
   %p
-    = k + ': ' + v
+    = k + ': ' + v.to_s
 
 %h2
   Items:
@@ -49,6 +49,6 @@
       = item.name
       - item.options.each do |option|
         %p
-          = option.name + ': ' + option.value
+          = option.name + ': ' + option.value.to_s
 
 = console

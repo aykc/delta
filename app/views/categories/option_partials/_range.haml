@@ -1,3 +1,7 @@
 %p
   = option.name + ': '
-  = range_field_tag "filter[#{option.id}]", min: option.validations[:minimum], max: option.validations[:maximum], step: 1
+  -#= range_field_tag "filter[#{option.id}]", @filter[option.id.to_s], in: option.validations[:minimum]..option.validations[:maximum], step: 1
+  - min_value = @filter[option.id.to_s]['0'] if @filter[option.id.to_s]
+  - max_value = @filter[option.id.to_s]['1'] if @filter[option.id.to_s]
+  = text_field_tag "filter[#{option.id}][0]", min_value
+  = text_field_tag "filter[#{option.id}][1]", max_value
