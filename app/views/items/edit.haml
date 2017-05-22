@@ -1,0 +1,20 @@
+%a
+  = link_to "back", item_path(@item)
+
+%h1
+  = @category.name
+= form_for @item do |f|
+  = f.hidden_field :category_id, value: @category.id
+  = f.label :name
+  = f.text_field :name
+  %h2
+    Options:
+  - @item.option_groups.each do |group|
+    %fieldset
+      = "#{group.name}: "
+      = f.fields_for :options, group.options do |option|
+        = render option.object.option_type, f: option
+  %br
+  = f.submit
+
+= console

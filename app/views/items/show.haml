@@ -1,5 +1,6 @@
 %h1
   = @item.name
+= link_to "edit", edit_item_path(@item)
 %h2
   Specifications:
 - @item.option_groups.each do |group|

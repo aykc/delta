@@ -5,6 +5,7 @@ class Category < ApplicationRecord
   validates_associated :options
   before_save :prepare_options_to_save
   before_update :prepare_options_to_save
+  attr_accessor :raw_options
 
   def filter(attrs)
     # (" options -> '0144424b-d70b-4eed-a9fc-9008aecb37af' ->> 'value' = 'blue'

@@ -22,7 +22,7 @@ class Item < ApplicationRecord
   end
 
   def options
-    options = category_options
+    options = category_options.map(&:dup)
     opts = read_attribute(:options)
     options.each{|o| opts.each{|k, v| o.value = v['value'] if k.to_i == o.id.to_i }}
     # write_attribute :options, options
@@ -30,7 +30,7 @@ class Item < ApplicationRecord
 
   def options_attributes=(attributes)
     options.each{|o| attributes.each{|k, v| o.value = v['value'] if v['id'].to_i == o.id.to_i }}
-    write_attribute(:options, options)
+    # write_attribute(:options, options)
   end
 
   def prepare_options_to_save

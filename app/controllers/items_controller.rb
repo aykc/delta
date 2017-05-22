@@ -5,6 +5,18 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find params[:id]
   end
+  def edit
+    @item = Item.find params[:id]
+    @category = @item.category
+  end
+  def update
+    @item = Item.find params[:id]
+    if @item.update(item_params)
+      redirect_to @item
+    else
+      render 'edit'
+    end
+  end
   def new
     @category = Category.find(params[:category_id])
     @item = Item.new(category_id: @category.id)
